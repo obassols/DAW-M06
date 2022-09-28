@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./CSS/AltArticle.css">
     <script type="text/javascript" src="JS/AltArticle.js"></script>
 </head>
+<!-- No afegir mes inputs / canviar d'ordre els mateixos -->
 
 <body>
     <!-- Identificacio -->
@@ -18,7 +19,7 @@
         <br>
         <div>
             <label>Codi: <input type="text"></label>
-            <img>
+            <img src="Images/error.png">
         </div>
         <br>
         <div>
@@ -30,33 +31,39 @@
     <div>
         <h2>Caracteristiques</h2>
         <div>
-            <label>Amplada: <input type="number"></label>
+            <label>Amplada: <input type="text" name="parameters"></label>
         </div>
         <br>
         <div>
-            <label>Llargada: <input type="number"></label>
+            <label>Llargada: <input type="text" name="parameters"></label>
         </div>
         <br>
         <div>
-            <label>Altura: <input type="number"></label>
+            <label>Altura: <input type="text" name="parameters"></label>
         </div>
+        <br>
+        <p></p>
         <br>
     </div>
     <!-- Ubicacio -->
     <div>
         <h2>Ubicacio</h2>
         <div>
-            <label>Passadis: <input type="text"></label>
-            <img>
+            <label>Passadis: <input type="text" name="location"></label>
+            <img src="Images/error.png">
         </div>
         <div>
-            <label>Estanteria: <input type="text"></label>
-            <img>
+            <label>Estanteria: <input type="text" name="location"></label>
+            <img src="Images/error.png">
         </div>
         <div>
-            <label>Forat: <input type="text"></label>
-            <img>
+            <label>Forat: <input type="text" name="location"></label>
+            <img src="Images/error.png">
         </div>
+    </div>
+    <br>
+    <button>Alta</button>
+    <div id="results">
     </div>
 </body>
 
