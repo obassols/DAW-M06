@@ -37,8 +37,8 @@ function goMainPage() {
 // Crea les estrelles dins el div negre
 function createSky() {
     var canvas = document.getElementById('starsCanvas');
-    canvas.height = 1500;
-    canvas.width = 1500;
+    canvas.height = 1200;
+    canvas.width = 1200;
     let ctx = canvas.getContext('2d');
     if (stars.length == 0) stars = generateStars(1000, canvas.width, canvas.height);
 
