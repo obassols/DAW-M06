@@ -1,0 +1,72 @@
+[
+    {
+        "code" : 1,
+        "name" : "Porc",
+        "price" : 100
+    },
+    {
+        "code": 2,
+        "name": "Vaca",
+        "price": 200
+    },
+    {
+        "code": 3,
+        "name": "Pollastre",
+        "price": 50
+    },
+    {
+        "code": 4,
+        "name": "Llet",
+        "price": 5
+    },
+    {
+        "code": 5,
+        "name": "Mantega",
+        "price": 2.50
+    },
+    {
+        "code": 6,
+        "name": "Arròs",
+        "price": 1.25
+    },
+    {
+        "code": 7,
+        "name": "Tonyina",
+        "price": 3
+    },
+    {
+        "code": 8,
+        "name": "Xocolata",
+        "price": 7
+    },
+    {
+        "code": 9,
+        "name": "Farina",
+        "price": 14
+    },
+    {
+        "code": 10,
+        "name": "Sal",
+        "price": 19
+    },
+    {
+        "code": 11,
+        "name": "Sucre",
+        "price": 1
+    },
+    {
+        "code": 12,
+        "name": "Suc",
+        "price": 9
+    },
+    {
+        "code": 13,
+        "name": "Ou",
+        "price": 2
+    },
+    {
+        "code": 14,
+        "name": "Conill",
+        "price": 75
+    }
+]

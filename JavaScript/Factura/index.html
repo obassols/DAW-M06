@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/styles.css">
+    <link rel="application/json" href="./JSON/Articles.json">
+    <script type="module" src="JS/script.js"></script>
+    <script type="module" src="JS/modules/Article.mjs"></script>
+    <script type="module" src="JS/modules/Factura.mjs"></script>
+    <title>Factura</title>
+</head>
+<body>
+    <h3>Num factura: <span id="numCode"></span></h3>
+    <div>
+        <label> Article: 
+        <select id="articleSelect">
+        </select>
+        </label>
+        <button id="addArticle">+</button>
+    </div>
+    <br>
+    <div>
+        <table id="articleTable">
+        </table>
+        <p>Base Imposable: <span id="imposableBase"></span> €</p>
+        <p>IVA (21%): <span id="iva"></span> €</p>
+        <p>Import Total: <span id="totalImport"></span> €</p>
+    </div>
+    <br>
+    <div>
+        <label>Codi factura: <input type="text" id="restoreCode"></label>
+        <button id="restoreButton">Recuperar</button>
+    </div>
+</body>
+</html>
