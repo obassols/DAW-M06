@@ -3,7 +3,9 @@ let stars = [];
 window.onload = function start() {
     setInputsValues();
     document.getElementById("starNum").addEventListener("change", updateValue);
-    document.getElementsByTagName("button")[0].addEventListener("click", goMainPage);
+    document.getElementsByTagName("button")[0].addEventListener("click", updateMoveValue);
+    document.getElementsByTagName("button")[1].addEventListener("click", updateMoveValue);
+    document.getElementsByTagName("button")[2].addEventListener("click", goMainPage);
     createSky();
 }
 
@@ -19,6 +21,24 @@ function setInputsValues() {
         localStorage.setItem("starNum", starNum.value);
     }
     starNumValue.innerText = starNum.value;
+}
+
+function updateMoveValue(e) {
+    let moveValue = document.getElementById("starMoveValue");
+    if (e.target.id == "plusMove") {
+        moveValue.innerText++;
+        moveStars(1);
+    } else if (e.target.id == "minusMove") {
+        moveValue.innerText--;
+        moveStars(-1);
+    }
+}
+
+function moveStars(moveValue) {
+    stars.forEach(star => {
+        star.x = star.x + moveValue;
+    })
+    createSky();
 }
 
 // Actualitza el valor de l'slider starNum
@@ -67,7 +87,7 @@ function generateStars(num, width, height) {
 // Dibuixa un estrella dins el context que li passes per parametre
 function draw(context, star) {
     context.beginPath();
-    let color = 'rgba(255,255,255,' + star.opacity + ')';
+    let color = 'rgba(' + star.color1 + ',' + star.color2 + ',' + star.color3 + ',' + star.opacity + ')';
     context.fillStyle = color;
     context.arc(star.x, star.y, star.radius, 0, 2 * Math.PI);
     context.fill();

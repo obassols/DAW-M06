@@ -129,14 +129,27 @@ function printArticleRow(articleRow) {
 
     // Quantity
     td = document.createElement('td');
-    let input = document.createElement('input');
 
+    let buttonPlus = document.createElement('button');
+    buttonPlus.innerText = "+";
+    buttonPlus.id = "plus" + articleRow.article.name;
+    buttonPlus.addEventListener("click", addOneQuantityArticle);
+    td.appendChild(buttonPlus);
+
+    let input = document.createElement('input');
     input.addEventListener("change", changeQuantity);
     input.value = articleRow.quantity;
     input.type = "number";
     input.min = 0;
     input.id = "input" + articleRow.article.name;
     td.appendChild(input);
+
+    let buttonMinus = document.createElement('button');
+    buttonMinus.innerText = "-";
+    buttonMinus.id = "minus" + articleRow.article.name;
+    buttonMinus.addEventListener("click", removeOneQuantityArticle);
+    td.appendChild(buttonMinus);
+
     tr.appendChild(td);
 
     // Price
@@ -152,6 +165,35 @@ function printArticleRow(articleRow) {
 
     document.getElementById("articleTable").appendChild(tr);
 } 
+
+function addOneQuantityArticle(e) {
+    let itemName = e.target.id.replace("plus", "");
+    let search = factura.articles.findIndex(el => el.article.name == itemName);
+    factura.articles[search].quantity++;
+    factura.imposableBase += factura.articles[search].article.price;
+    factura.articles[search].totalPrice += factura.articles[search].article.price;
+    document.getElementById("totalPrice" + itemName).innerText = factura.articles[search].totalPrice + " €";
+    updateFacturaImport();
+    document.getElementById("input" + itemName).value = factura.articles[search].quantity;
+}
+
+function removeOneQuantityArticle(e) {
+    let itemName = e.target.id.replace("minus", "");
+    let search = factura.articles.findIndex(el => el.article.name == itemName);
+    if (factura.articles[search].quantity > 1) {
+        factura.articles[search].quantity--;
+        factura.imposableBase -= factura.articles[search].article.price;
+        factura.articles[search].totalPrice -= factura.articles[search].article.price;
+        document.getElementById("totalPrice" + itemName).innerText = factura.articles[search].totalPrice + " €";
+        updateFacturaImport();
+        document.getElementById("input" + itemName).value = factura.articles[search].quantity;
+    } else {
+        factura.imposableBase -= factura.articles[search].totalPrice;
+        updateFacturaImport();
+        factura.articles.splice(search, 1);
+        document.getElementById(itemName).remove();
+    }
+}
 
 async function changeQuantity(e) {
     e.target.value = Math.round(parseInt(e.target.value));

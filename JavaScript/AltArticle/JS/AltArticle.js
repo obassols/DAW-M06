@@ -1,5 +1,6 @@
 window.onload = function start() {
     insertFamilies();
+    insertLocations();
     document.getElementsByTagName("select")[0].addEventListener("change", checkCode);
     document.getElementsByTagName("input")[0].addEventListener("input", checkCode);
     document.getElementsByName("parameters").forEach(element => {
@@ -9,6 +10,7 @@ window.onload = function start() {
     locationInputs[0].addEventListener("input", checkHallway);
     locationInputs[1].addEventListener("input", checkBookshelf);
     locationInputs[2].addEventListener("input", checkHole);
+    document.getElementById("edificiInput").addEventListener("input", checkBuilding);
     document.getElementsByTagName("button")[0].addEventListener("click", checkAll);
 }
 
@@ -52,6 +54,82 @@ function insertFamilies() {
         //Finalment afegeixo la opcio com a child del select
         select.appendChild(opt);
     });
+}
+
+function insertLocations() {
+
+    // Variable de totes les localitzacions
+    const localitzacions = [
+        {
+            label: "San Francisco",
+            value: "sanFrancisco"
+        },
+        {
+            label: "New York",
+            value: "newYork"
+        },
+        {
+            label: "Texas",
+            value: "texas"
+        },
+        {
+            label: "London",
+            value: "london"
+        },
+        {
+            label: "Girona",
+            value: "girona"
+        },
+        {
+            label: "Tokyo",
+            value: "tokyo"
+        },
+        {
+            label: "Shangai",
+            value: "shangai"
+        },
+        {
+            label: "Osaka",
+            value: "osaka"
+        }
+    ]
+
+    //Agafo el segon select
+    let select = document.getElementsByTagName("select")[1];
+
+    //Ordeno l'array de localitzacions
+    localitzacions.sort((a, b) => (a.label > b.label) ? 1 : ((b.label > a.label) ? -1 : 0));
+
+    //Per cada element a l'array de localitzacions creo una opcio i li passo el valor i la label
+    localitzacions.forEach(element => {
+        let opt = document.createElement('option');
+        opt.value = element.value;
+        opt.label = element.label;
+        //Finalment afegeixo la opcio com a child del select
+        select.appendChild(opt);
+    });
+}
+
+function checkBuilding() {
+    const rex = /^[A-Z/a-z]{5}[+][0-9]{3}[.][a-z]{2}$/;
+    let check = false;
+    let buildingInput = document.getElementById("edificiInput");
+    let imageString = "./Images/error.png";
+    // Comprovo que el passadis segueixi la expresio regular
+    if (rex.test(buildingInput.value)) {
+        if (checkLocationCode(buildingInput.value.substring(0, 5))) {
+            imageString = "./Images/success.png";
+            check = true;
+        }
+    }
+    document.getElementsByTagName("img")[4].src = imageString;
+    return check;
+}
+
+function checkLocationCode(str) {
+    let select = document.getElementsByTagName("select")[1];
+    let buildingValue = select.value.substring(0, 5).toLowerCase();
+    return buildingValue == str.toLowerCase();
 }
 
 function checkCode() {
