@@ -1,0 +1,11 @@
+div {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+}
+
+div.line {
+  width: 100vw;
+  height: 5px;
+  background-color: cyan;
+}

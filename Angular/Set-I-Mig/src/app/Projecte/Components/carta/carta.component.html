@@ -1,0 +1,16 @@
+<div class="card" (click)="agafar(carta)">
+  <div *ngIf="carta.visible">
+    <img [src]="carta.img" [alt]="carta.num + carta.pal">
+    <div class="label">
+      <span>{{ carta.num }}</span>
+      <span>{{ carta.pal }}</span>
+    </div>
+  </div>
+  <div *ngIf="!carta.visible">
+    <img src="/assets/reverse.png" alt="reverse_card">
+    <div class="label">
+      <span>Numero</span>
+      <span>Pal</span>
+    </div>
+  </div>
+</div>

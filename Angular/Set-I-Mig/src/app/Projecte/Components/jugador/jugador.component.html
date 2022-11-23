@@ -1,0 +1,6 @@
+<h2>Jugador: {{getJugador().contar()}}</h2>
+<div class="flex">
+  <div *ngFor="let carta of getJugador().cartes">
+    <app-carta [carta]="carta"></app-carta>
+  </div>
+</div>
