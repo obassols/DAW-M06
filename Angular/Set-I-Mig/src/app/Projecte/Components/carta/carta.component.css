@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Secular+One&display=swap');
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 130px;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+img {
+  border-radius: 5px 5px 0 0;
+  width: 130px;
+  height: 200px;
+  object-fit: contain;
+}
+
+.label {
+  display: flex;
+  justify-content: center;
+  padding: 2px 16px;
+}
+
+.label span {
+  margin: 0 5px;
+  font-family: 'Secular One', sans-serif;
+}
