@@ -1,0 +1,5 @@
+<div class="flex">
+  <div *ngFor="let row of board.rows" (click)="checkFlips()">
+    <app-cardrow [cardRow]="row"></app-cardrow>
+  </div>
+</div>

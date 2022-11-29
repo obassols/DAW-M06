@@ -1,0 +1,5 @@
+<div class="flex">
+  <div *ngFor="let card of cardRow.cards" (click)="flip(card)">
+    <app-card [card]="card"></app-card>
+  </div>
+</div>
