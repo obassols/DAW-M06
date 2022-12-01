@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { CardComponent } from './Project/Components/card/card.component';
 import { CardrowComponent } from './Project/Components/cardrow/cardrow.component';
 import { BoardComponent } from './Project/Components/board/board.component';
+import { APP_BASE_HREF } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { BoardComponent } from './Project/Components/board/board.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,3 +1,4 @@
+<h2 *ngIf="counter > 0">Timer: {{ counter }}</h2>
 <div class="flex">
   <div *ngFor="let row of board.rows" (click)="checkFlips()">
     <app-cardrow [cardRow]="row"></app-cardrow>

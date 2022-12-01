@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { APP_BASE_HREF } from '@angular/common';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Card } from '../../Model/Entites/Implemetations/Card';
 
 @Component({
@@ -9,7 +10,10 @@ import { Card } from '../../Model/Entites/Implemetations/Card';
 export class CardComponent implements OnInit {
 
   @Input() card!: Card;
-  constructor() { }
+  route: string;
+  constructor(@Inject(APP_BASE_HREF) private baseHref: string) {
+    this.route = baseHref;
+  }
 
   ngOnInit(): void {
   }

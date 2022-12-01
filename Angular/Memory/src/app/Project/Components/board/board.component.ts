@@ -1,7 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Board } from '../../Model/Entites/Implemetations/Board';
-import { Card } from '../../Model/Entites/Implemetations/Card';
-import { CardRow } from '../../Model/Entites/Implemetations/CardRow';
 
 @Component({
   selector: 'app-board',
@@ -13,7 +11,11 @@ export class BoardComponent implements OnInit {
   errors!: number;
   correctAnswers!: number;
   clearing!: boolean;
+  counter: number;
 
+  constructor() {
+    this.counter = 0;
+  }
 
   ngOnInit(): void {
     this.startGame();
@@ -24,7 +26,10 @@ export class BoardComponent implements OnInit {
     this.correctAnswers = 0;
     this.clearing = false;
     this.board = new Board(4, 4);
-
+    this.counter = 10;
+    const countdown = setInterval(() => {
+      this.counter--;
+    }, 1000);
     setTimeout(() => {
       this.board.rows.forEach(row => {
         row.cards.forEach(card => {
@@ -32,6 +37,8 @@ export class BoardComponent implements OnInit {
         });
         row.fliped = false;
       });
+      clearInterval(countdown);
+      this.counter = 0;
     }, 10000);
   }
 
