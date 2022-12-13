@@ -1,0 +1,29 @@
+<h1>Incidencia Reactive Forms</h1>
+
+<form [formGroup]="incidenciaForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label>Codi: 
+      <input type="text" formControlName="codi">
+    </label>
+    <label *ngIf="incidenciaForm.controls['codi'].invalid">
+      El codi és incorrecte
+    </label>
+  </div>
+  <div>
+    <label>Titol: 
+      <input type="text" formControlName="titol">
+    </label>
+  </div>
+  <div formGroupName="responsable">
+    <label>Rol:
+      <input type="text" formControlName="rol">
+    </label>
+    <label *ngIf="getControlResponsableRol().invalid">
+      El rol és obligatori
+    </label>
+<!--     <label>Nom:
+      <input type="text" formControlName="nom">
+    </label> -->
+  </div>
+  <button [disabled]="!incidenciaForm.valid">Registrar</button>
+</form>
