@@ -1,1 +1,35 @@
-<p>form-criteria works!</p>
+<h1>Incidencia Reactive Forms</h1>
+
+<form [formGroup]="criteriaForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label>Label:
+      <input type="text" formControlName="label">
+    </label>
+    <label *ngIf="criteriaForm.controls['label'].invalid">
+      The label is incorrect
+    </label>
+  </div>
+  <h2>Valorations</h2>
+  <div formArrayName="valorations">
+    <div *ngFor="let valoration of valorations.controls; let i = index" [formGroupName]="i">
+      <label>Label:
+        <input type="text" formControlName="label">
+      </label>
+      <!-- <label *ngIf="getControlValorationsLabel().invalid">
+        The label is required
+      </label> -->
+      <label>Puntuation:
+        <input type="number" formControlName="puntuation">
+      </label>
+      <!-- <label *ngIf="getControlValorationsPuntuation().invalid">
+        The puntuation is required
+      </label> -->
+    </div>
+  </div>
+  <div>
+    <button (click)="addValoration()">Add</button>
+    <button (click)="removeValoration()">Remove</button>
+  </div>
+
+  <button [disabled]="!criteriaForm.valid">Registrar</button>
+</form>
