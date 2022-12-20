@@ -42,8 +42,8 @@ export class FormCriteriaComponent implements OnInit {
     console.log(this.valorations);
   }
 
-  removeValoration(): void {
-    this.valorations.removeAt(this.valorations.length - 1);
+  removeValoration(i: number): void {
+    this.valorations.removeAt(i);
     console.log(this.valorations);
   }
 

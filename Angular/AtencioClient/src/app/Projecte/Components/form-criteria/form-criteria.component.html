@@ -24,11 +24,11 @@
       <label *ngIf="getValorationsPuntuation(i).invalid">
         The puntuation is wrong
       </label>
+      <button (click)="removeValoration(i)">Remove</button>
     </div>
   </div>
   <div>
     <button (click)="addValoration()">Add</button>
-    <button (click)="removeValoration()">Remove</button>
   </div>
 
   <button [disabled]="!criteriaForm.valid">Registrar</button>
