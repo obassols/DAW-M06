@@ -15,15 +15,15 @@
       <label>Label:
         <input type="text" formControlName="label">
       </label>
-      <!-- <label *ngIf="getControlValorationsLabel().invalid">
+      <label *ngIf="getValorationsLabel(i).invalid">
         The label is required
-      </label> -->
+      </label>
       <label>Puntuation:
         <input type="number" formControlName="puntuation">
       </label>
-      <!-- <label *ngIf="getControlValorationsPuntuation().invalid">
-        The puntuation is required
-      </label> -->
+      <label *ngIf="getValorationsPuntuation(i).invalid">
+        The puntuation is wrong
+      </label>
     </div>
   </div>
   <div>

@@ -51,12 +51,12 @@ export class FormCriteriaComponent implements OnInit {
     console.log(this.criteriaForm.value);
   }
 
-  /* getControlValorationsLabel(): any {
-    return this.criteriaForm.get('valorations.label');
+  getValorationsLabel(i: number): any {
+    return this.valorations.at(i).get('label');
   }
 
-  getControlValorationsPuntuation(): any {
-    return this.criteriaForm.get('valorations.puntuation');
-  } */
+  getValorationsPuntuation(i: number): any {
+    return this.valorations.at(i).get('puntuation');
+  }
 
 }
