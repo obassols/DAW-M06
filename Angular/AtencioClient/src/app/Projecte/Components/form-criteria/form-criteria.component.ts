@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { puntuationUnique } from './Validator/Validator';
 
 @Component({
   selector: 'app-form-criteria',
@@ -7,56 +8,94 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./form-criteria.component.scss']
 })
 export class FormCriteriaComponent implements OnInit {
-  criteriaForm!: FormGroup;
+  valorationsOptions = {
+    label: new FormControl('', Validators.required),
+    puntuation: new FormControl('', {
+      validators: [
+        Validators.required,
+        Validators.max(10),
+        Validators.min(0),
+        // puntuationUnique()
+      ]
+    })
+  };
 
-  valorations: FormArray = this.fb.array([], [
-    Validators.minLength(2),
-  ]);
-
-  valorationsConfig = {
+  criteriaTemplate = {
     label: ['', [
       Validators.required
     ]],
-    puntuation: ['', [
+    valorations: this.fb.array([this.fb.group(this.valorationsOptions)], [
       Validators.required,
-      Validators.pattern('^[0-9]$')
-    ]]
+      Validators.minLength(2)
+    ])
   };
+
+  mainForm: FormArray = this.fb.array([this.fb.group(this.criteriaTemplate)]);
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.addValoration();
-    this.addValoration();
-
-    this.criteriaForm = this.fb.group({
-      label: ['', [
-        Validators.required
-      ]],
-      valorations: this.valorations
-    });
+    const templateString = localStorage.getItem('formTemplate');
+    if (templateString) {
+      const testForm = JSON.parse(templateString);
+      if (testForm.controls.length > 0) {
+        this.mainForm = testForm;
+      }
+    }
   }
 
-  addValoration(): void {
-    this.valorations.push(this.fb.group(this.valorationsConfig));
-    console.log(this.valorations);
+  addCriteria(): void {
+    this.mainForm.push(this.fb.group(this.criteriaTemplate));
+    console.log(this.mainForm.controls);
   }
 
-  removeValoration(i: number): void {
-    this.valorations.removeAt(i);
-    console.log(this.valorations);
+  addValoration(criteriaIndex: number): void {
+    const control = this.getValorationsFromCriteria(criteriaIndex) as FormArray;
+    control.push(this.fb.group(this.valorationsOptions));
+    console.log(control);
   }
 
-  onSubmit(): void {
-    console.log(this.criteriaForm.value);
+  removeCriteria(criteriaIndex: number): void {
+    this.mainForm.removeAt(criteriaIndex);
+    console.log(this.mainForm.controls);
   }
 
-  getValorationsLabel(i: number): any {
-    return this.valorations.at(i).get('label');
+  removeValoration(criteriaIndex: number, valorationIndex: number): void {
+    const control = this.getValorationsFromCriteria(criteriaIndex) as FormArray;
+    control.removeAt(valorationIndex);
+    console.log(control);
   }
 
-  getValorationsPuntuation(i: number): any {
-    return this.valorations.at(i).get('puntuation');
+  getCriteriaLabel(criteriaIndex: number): any {
+    const control = this.mainForm.at(criteriaIndex).get('label');
+    return control;
   }
 
+  getValorationsLabel(criteriaIndex: number, valorationIndex: number): any {
+    return this.getValoration(criteriaIndex, valorationIndex).get('label');
+  }
+
+  getValorationsPuntuation(criteriaIndex: number, valorationIndex: number): any {
+    return this.getValoration(criteriaIndex, valorationIndex).get('puntuation');
+  }
+
+  getCriteriaForm(criteriaIndex: number): any {
+    const control = this.mainForm.controls[criteriaIndex];
+    return control;
+  }
+
+  getValorationsFromCriteria(criteriaIndex: number): any {
+    const control = this.mainForm.at(criteriaIndex).get('valorations') as FormArray;
+    return control;
+  }
+
+  getValoration(criteriaIndex: number, valorationIndex: number): any {
+    const control = this.getValorationsFromCriteria(criteriaIndex).controls[valorationIndex];
+    return control;
+  }
+
+  register(): void {
+    localStorage.setItem('formTemplate', JSON.stringify(this.mainForm));
+    console.log(this.mainForm.value);
+  }
 }

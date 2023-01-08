@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormArray, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-main-form',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainFormComponent implements OnInit {
 
+  formTemplate!: FormArray;
+
   constructor() { }
 
   ngOnInit(): void {
+    const stringTemplate = localStorage.getItem('formTemplate');
+    console.log(stringTemplate);
+    if (stringTemplate) {
+      this.formTemplate = JSON.parse(stringTemplate);
+    }
   }
 
 }

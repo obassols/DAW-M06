@@ -1,35 +1,44 @@
 <h1>Incidencia Reactive Forms</h1>
 
-<form [formGroup]="criteriaForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label>Label:
-      <input type="text" formControlName="label">
-    </label>
-    <label *ngIf="criteriaForm.controls['label'].invalid">
-      The label is incorrect
-    </label>
-  </div>
-  <h2>Valorations</h2>
-  <div formArrayName="valorations">
-    <div *ngFor="let valoration of valorations.controls; let i = index" [formGroupName]="i">
-      <label>Label:
+<form formArrayname="mainForm">
+  <div *ngFor="let criteriaForm of mainForm.controls; let criteriaIndex = index"
+    [formGroup]="criteriaForm | asFormGroup">
+    <div>
+      <label>Criteria: 
         <input type="text" formControlName="label">
       </label>
-      <label *ngIf="getValorationsLabel(i).invalid">
-        The label is required
+      <label *ngIf="getCriteriaLabel(criteriaIndex).invalid">
+        The title is required
       </label>
-      <label>Puntuation:
-        <input type="number" formControlName="puntuation">
-      </label>
-      <label *ngIf="getValorationsPuntuation(i).invalid">
-        The puntuation is wrong
-      </label>
-      <button (click)="removeValoration(i)">Remove</button>
+    </div>
+    <h3>Valorations</h3>
+    <div formArrayName="valorations">
+      <div *ngFor="let valoration of this.getValorationsFromCriteria(criteriaIndex).controls; let valorationIndex = index"
+        [formGroup]="valoration | asFormGroup">
+        <label>Label:
+          <input type="text" formControlName="label">
+        </label>
+        <label *ngIf="getValorationsLabel(criteriaIndex, valorationIndex).invalid">
+          The label is required
+        </label>
+        <label>Puntuation:
+          <input type="number" formControlName="puntuation">
+        </label>
+        <label *ngIf="getValorationsPuntuation(criteriaIndex, valorationIndex).invalid">
+          The puntuation is wrong
+        </label>
+        <button (click)="removeValoration(criteriaIndex, valorationIndex)">Remove</button>
+      </div>
+      <div>
+        <button (click)="addValoration(criteriaIndex)">Add Valoration</button>
+      </div>
+    </div>
+    <div>
+      <button (click)="removeCriteria(criteriaIndex)">Remove Criteria</button>
     </div>
   </div>
   <div>
-    <button (click)="addValoration()">Add</button>
+    <button (click)="addCriteria()">Add Criteria</button>
   </div>
-
-  <button [disabled]="!criteriaForm.valid">Registrar</button>
+  <button [disabled]="mainForm.invalid" (submit)="register()">Registrar</button>
 </form>

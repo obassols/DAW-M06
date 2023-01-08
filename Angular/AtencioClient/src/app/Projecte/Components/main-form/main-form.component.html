@@ -1,1 +1,10 @@
-<p>main-form works!</p>
+<h2>Main Form</h2>
+
+<table>
+  <tr>
+    <th>Criteria</th>
+    <th>Valorations</th>
+  </tr>
+  <tr *ngFor="let criteria of this.formTemplate.controls; let i = index" [formGroupName]="i">
+  </tr>
+</table>
