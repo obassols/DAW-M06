@@ -1,44 +1,27 @@
 <h1>Incidencia Reactive Forms</h1>
 
-<form formArrayname="mainForm">
-  <div *ngFor="let criteriaForm of mainForm.controls; let criteriaIndex = index"
-    [formGroup]="criteriaForm | asFormGroup">
-    <div>
-      <label>Criteria: 
-        <input type="text" formControlName="label">
-      </label>
-      <label *ngIf="getCriteriaLabel(criteriaIndex).invalid">
-        The title is required
-      </label>
-    </div>
-    <h3>Valorations</h3>
-    <div formArrayName="valorations">
-      <div *ngFor="let valoration of this.getValorationsFromCriteria(criteriaIndex).controls; let valorationIndex = index"
-        [formGroup]="valoration | asFormGroup">
+<form [formGroup]="mainForm">
+    <label>Criteria: 
+      <input type="text" formControlName="label">
+    </label>
+  <h3>Valorations</h3>
+  <div formArrayName="valorations">
+    <div *ngFor="let valoration of getValorations().controls; let valorationIndex = index">
+      <div [formGroupName]="valorationIndex">
         <label>Label:
           <input type="text" formControlName="label">
-        </label>
-        <label *ngIf="getValorationsLabel(criteriaIndex, valorationIndex).invalid">
-          The label is required
         </label>
         <label>Puntuation:
           <input type="number" formControlName="puntuation">
         </label>
-        <label *ngIf="getValorationsPuntuation(criteriaIndex, valorationIndex).invalid">
-          The puntuation is wrong
-        </label>
-        <button (click)="removeValoration(criteriaIndex, valorationIndex)">Remove</button>
-      </div>
-      <div>
-        <button (click)="addValoration(criteriaIndex)">Add Valoration</button>
+        <button (click)="removeValoration(valorationIndex)">Remove</button>
       </div>
     </div>
     <div>
-      <button (click)="removeCriteria(criteriaIndex)">Remove Criteria</button>
+      <button (click)="addValoration()">Add Valoration</button>
     </div>
+    
   </div>
-  <div>
-    <button (click)="addCriteria()">Add Criteria</button>
-  </div>
-  <button [disabled]="mainForm.invalid" (submit)="register()">Registrar</button>
+  <button [disabled]="mainForm.invalid" (click)="register()">Registrar</button>
+  <button (click)="clearTemplate()">Netejar</button>
 </form>
