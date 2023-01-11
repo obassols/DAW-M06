@@ -1,10 +1,29 @@
 <h2>Main Form</h2>
-
+<form formArrayname="results">
 <table>
   <tr>
     <th>Criteria</th>
     <th>Valorations</th>
   </tr>
-  <tr *ngFor="let criteria of this.formTemplate.controls; let i = index" [formGroupName]="i">
+  <tr *ngFor="let criteria of formTemplate; let i = index" [formGroup]="results.controls[i] | asFormGroup" >
+    <td>{{ criteria.label }}</td>
+    <td>
+      <table>
+        <span *ngFor="let valoration of criteria.valorations">
+            <input type="radio" [id]="'criteria' + i + valoration.puntuation" [value]="valoration.puntuation" formControlName="selected">
+            <label [for]="'criteria' + i + valoration.puntuation" >
+            <td style="border: solid 2px black">
+              <tr>{{ valoration.puntuation }}</tr>
+              <tr>{{ valoration.label }}</tr>
+            </td>
+            </label>
+        </span>
+      </table>
+    </td>
   </tr>
 </table>
+</form>
+<div *ngIf="results.valid">
+  <h3>Mitjana:</h3>
+  <span>{{ average }}</span>
+</div>
