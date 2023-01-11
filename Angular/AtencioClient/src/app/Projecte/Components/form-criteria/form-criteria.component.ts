@@ -52,8 +52,8 @@ export class FormCriteriaComponent implements OnInit {
     let controls = [];
     if (controlsString) {
       controls = JSON.parse(controlsString);
-      controls.push(this.mainForm.value);
     }
+    controls.push(this.mainForm.value);
     localStorage.setItem('formTemplate', JSON.stringify(controls));
     this.mainForm.reset();
   }
