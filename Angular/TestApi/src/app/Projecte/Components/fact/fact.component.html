@@ -1,0 +1,14 @@
+<h3>Random Fact:</h3>
+<ul>
+  <li>{{ fact }}</li>
+</ul>
+
+<h3>3 Facts:</h3>
+<ul>
+  <li *ngFor="let fact of factNth">{{ fact.fact }}</li>
+</ul>
+
+<h3>All Facts:</h3>
+<ul>
+  <li *ngFor="let fact of allFacts">{{ fact.fact }}</li>
+</ul>
