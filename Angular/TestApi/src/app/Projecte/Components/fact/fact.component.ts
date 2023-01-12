@@ -17,23 +17,17 @@ export class FactComponent implements OnInit {
   constructor(private httpClient: CatFact) { }
 
   ngOnInit(): void {
-    this.httpClient.getFact().subscribe(
-      data => {
-        this.fact = data.fact;
-      }
-    );
+    this.httpClient.getFact().subscribe(data => {
+      this.fact = data.fact;
+    });
 
-    this.httpClient.getNthFacts(3).subscribe(
-      data => {
-        this.factNth = data.data;
-      }
-    );
+    this.httpClient.getNthFacts(3).subscribe(data => {
+      this.factNth = data.data;
+    });
 
-    this.httpClient.getAllFacts().subscribe(
-      data => {
-        this.allFacts = data.data;
-      }
-    );
+    this.httpClient.getAllFacts().subscribe(data => {
+      this.allFacts = data.data;
+    });
   }
 
 }

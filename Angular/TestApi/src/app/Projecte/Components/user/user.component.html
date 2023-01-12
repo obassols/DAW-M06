@@ -1,0 +1,23 @@
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Gender</th>
+    <th>Status</th>
+  </tr>
+  <tr *ngFor="let user of users">
+    <td>{{ user.id }}</td>
+    <td>{{ user.name }}</td>
+    <td>{{ user.email }}</td>
+    <td>{{ user.gender }}</td>
+    <td>{{ user.status }}</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><input (ngModel)="newUser.name"></td>
+    <td><input (ngModel)="newUser.email"></td>
+    <td><input (ngModel)="newUser.gender"></td>
+    <td><input (ngModel)="newUser.status"></td>
+  </tr>
+</table>
